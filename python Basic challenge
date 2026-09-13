@@ -1,0 +1,76 @@
+    # Student Grade and Result Calculator
+
+def get_marks(subject):
+    while True:
+        marks = float(input("Enter marks for " + subject + ": "))
+
+        if marks >= 0 and marks <= 100:
+            return marks
+        else:
+            print("Enter marks between 0 and 100.")
+
+
+def grade(percentage):
+    if percentage >= 80:
+        return "A+"
+    elif percentage >= 70:
+        return "A"
+    elif percentage >= 60:
+        return "B"
+    elif percentage >= 50:
+        return "C"
+    elif percentage >= 40:
+        return "D"
+    else:
+        return "F"
+
+
+def student_result():
+    name = input("\nEnter student name: ")
+
+    subjects = ["English", "Math", "Computer", "Science", "Urdu"]
+
+    total = 0
+
+    for subject in subjects:
+        total = total + get_marks(subject)
+
+    percentage = total / 5
+    student_grade = grade(percentage)
+
+    if percentage >= 40:
+        result = "Passed"
+    else:
+        result = "Failed"
+
+    print("\n--- Result ---")
+    print("Name:", name)
+    print("Total:", total, "/ 500")
+    print("Percentage:", round(percentage, 2), "%")
+    print("Grade:", student_grade)
+    print("Result:", result)
+
+    return name, percentage
+
+
+students = []
+
+while True:
+    student = student_result()
+    students.append(student)
+
+    again = input("\nEnter another student? yes/no: ")
+
+    if again.lower() != "yes":
+        break
+
+
+highest = students[0]
+
+for student in students:
+    if student[1] > highest[1]:
+        highest = student
+
+print("\n--- Highest Percentage ---")
+print("Student:", highest[0])
+print("Percentage:", round(highest[1], 2), "%")
